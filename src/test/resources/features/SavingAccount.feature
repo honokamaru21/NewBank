@@ -4,4 +4,6 @@ Feature: Savings account validation
     Given user goes to the main page
     When user logs in with valid credentials
 
-    Scenario Outline:
+    Scenario:
+      And user goes to checking account
+
