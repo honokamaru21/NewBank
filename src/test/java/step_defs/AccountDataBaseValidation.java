@@ -51,7 +51,7 @@ public class AccountDataBaseValidation {
 
     @Then("^account numbers have to match$")
     public void account_numbers_have_to_match() throws Throwable {
-        //conflict 2
+        //new conflict 2
         System.out.println (accountNumber);
         System.out.println (actualAccountNumber);
         Assert.assertEquals ("Account number validation failed", accountNumber, actualAccountNumber);
