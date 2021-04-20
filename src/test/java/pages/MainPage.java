@@ -36,4 +36,20 @@ public class MainPage {
         logOutButton.click ();
     }
 
+
+    @FindBy(id = "savings-menu")
+    public WebElement savingsMenu;
+
+    public void clickOnSavingsMenu(){
+        savingsMenu.click();
+    }
+
+    @FindBy(id = "view-savings-menu-item")
+    public WebElement viewSavingsButton;
+
+    public void clickOnViewSavingsButton(){
+        viewSavingsButton.click();
+    }
+
+
 }

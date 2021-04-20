@@ -18,11 +18,11 @@ public class DataBase2 {
             "jdbc:mysql://3.131.35.165:3306/{DB}?user=dbank&password=MyCOMPleaxPasSW0rd!12X";
 
     // Opening connection to a DB. If connection is not yet opened.
-    public static void open() {
+    public void open() {
         open("");
     }
 
-    public static void open(String database) {
+    public void open(String database) {
         try {
             if (connection == null) {
                 connection = DriverManager.getConnection(JDBC_URL.replace("{DB}", database));
@@ -41,7 +41,7 @@ public class DataBase2 {
     //FROM digitalbank.user_profile
     //WHERE id IN (?, ?, ?);
 // Should have same number of params as we have '?' in our query/statement
-    public static boolean executeStatement(String sqlStatement, Object... params) {
+    public boolean executeStatement(String sqlStatement, Object... params) {
         if (connection == null) open();
         try {
             if(params.length == 0) return statement.execute(sqlStatement);
@@ -56,7 +56,7 @@ public class DataBase2 {
         return false;
     }
 
-    public static boolean insertBean(String query, Object bean, String[] properties) {
+    public boolean insertBean(String query, Object bean, String[] properties) {
         if (connection == null) open();
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(query);
@@ -68,22 +68,23 @@ public class DataBase2 {
         return false;
     }
 
-    public static boolean truncateTable(String tableName) {
+    public boolean truncateTable(String tableName) {
         String sqlStatement = String.format("TRUNCATE Table %s;", tableName);
         return executeStatement(sqlStatement);
     }
 
-    public static boolean deleteRecord(String table, String column, String value) {
+    public boolean deleteRecord(String table, String column, String value) {
         String statement = String.format("DELETE FROM %s WHERE %s = '%s'", table, column, value);
         return executeStatement(statement);
     }
 
     // Object... = Object[]
-    public static ResultSetHandler query(String query, Object... params) {
+    public ResultSetHandler query(String query, Object... params) {
         return new ResultSetHandler(queryToRs(query, params));
     }
 
-    public static ResultSet queryToRs(String query, Object... params) {
+
+    public ResultSet queryToRs(String query, Object... params) {
         if (connection == null) open();
         try {
             if (params.length == 0) statement.executeQuery(query);
@@ -101,7 +102,7 @@ public class DataBase2 {
         return null;
     }
 
-    public static void close() {
+    public void close() {
         try {
             if (statement != null) statement.close();
             if (connection != null) connection.close();
@@ -112,4 +113,7 @@ public class DataBase2 {
             Assert.fail("Can't close connection to DB");
         }
     }
+
+
+
 }

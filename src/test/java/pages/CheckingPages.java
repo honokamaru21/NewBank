@@ -12,8 +12,13 @@ public class CheckingPages {
     }
 
     @FindBy(xpath = "//div[@contenteditable ='true'][1]")
-    public WebElement checkingAccountName;
+    public WebElement checkingAccountName;  //hobbit
 
     @FindBy(xpath = "//small[contains(text(),'Account Number')]")
     public WebElement checkingAccountNumber;
+
+
+
+
+
 }

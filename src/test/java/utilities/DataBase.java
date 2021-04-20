@@ -79,6 +79,9 @@ public class DataBase {
         }
         return table;
     }
+
+
+
 //    public void main(String[] args) {
 //        open();
 //        ResultSet rs = query("SELECT *\n" +

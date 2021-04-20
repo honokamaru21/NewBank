@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!-- this xml file is needed by log4j2 library -->
+
+<Configuration status="INFO">
+    <!-- Appenders (message writer types) are types of logging-->
+    <!-- there are print out in console appender-->
+    <!-- you can choose to write all of the logs to a file-->
+
+    <Appenders>
+        <!-- if you want your logs to go to console use console appender-->
+        <Console name="ABC" target="SYSTEM_OUT">
+            <!-- I want the logs to be printed out in this format-->
+            <!-- start with yhe current time-->
+            <PatternLayout pattern="[%level] %d{HH:mm:ss:SSS} - %msg - %l%n"/>
+
+        </Console>
+        <File name="Bank" fileName="log/bank_${date:yyyy-MM-dd}.log" append = "true">
+            <PatternLayout pattern="[%level] %d{HH:mm:ss:SSS} - %msg - {%c}%n"/>
+        </File>
+    </Appenders>
+    <!-- define loggers here-->
+    <Loggers>
+        <Root level="INFO">
+            <AppenderRef ref="ABC"/>
+            <AppenderRef ref="DigitalBank"/>
+        </Root>
+
+    </Loggers>
+</Configuration>
