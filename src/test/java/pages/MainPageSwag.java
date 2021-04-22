@@ -34,4 +34,10 @@ public class MainPageSwag {
     @FindBy(xpath="//a[@class='btn_action checkout_button']")
     public WebElement checkoutBtn;
 
+
+
+
+
+
+
 }

@@ -13,9 +13,3 @@ Feature: Validate current balance in savings account
       |savings account|amount|
       |JS_Account   |77000.00|
 
-
-
-#    Then user verify "<savings account>" $77000.00
-#  Examples:
-#    |savings account|
-#    |JS_Account   |

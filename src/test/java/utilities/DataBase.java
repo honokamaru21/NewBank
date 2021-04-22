@@ -8,7 +8,7 @@ public class DataBase {
     private static Connection connection;
     private static Statement statement;
     private static final String JDBC_URL = "jdbc:mysql://3.131.35.165:3306/digitalbank?user=dbank&password=MyCOMPleaxPasSW0rd!12X";
-    public void open() {
+    public static void open() {
         try {
             if (connection == null) {
                 connection = DriverManager.getConnection(JDBC_URL);
@@ -19,7 +19,7 @@ public class DataBase {
             Assert.fail("Can`t establish connection to DB");
         }
     }
-    public void close() {
+    public static void close() {
         try {
             if (connection != null) connection.close();
             if (statement!=null) statement.close();
@@ -30,7 +30,7 @@ public class DataBase {
             Assert.fail("Can`t close connection to DB");
         }
     }
-    public List<String> getColumnNames(ResultSet rs){
+    public static List<String> getColumnNames(ResultSet rs){
         List<String> columnNames = new ArrayList<>();
         try{
             ResultSetMetaData metaData = rs.getMetaData();
@@ -45,7 +45,7 @@ public class DataBase {
         return columnNames;
     }
 
-    public ResultSet query(String query){
+    public static ResultSet query(String query){
         if (connection == null) open();
         try {
             return statement.executeQuery(query);
@@ -55,7 +55,7 @@ public class DataBase {
         }
         return null;
     }
-    public List<Map<String, Object>> convertResultSet(ResultSet rs){
+    public static List<Map<String, Object>> convertResultSet(ResultSet rs){
         List<Map<String, Object>> table = new ArrayList<>();
         List<String> columnNames = getColumnNames(rs);
         // Populate table From result set

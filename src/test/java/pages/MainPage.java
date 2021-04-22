@@ -31,6 +31,13 @@ public class MainPage {
     @FindBy(xpath="//button[@class='btn btn-primary btn-sm']")
     public WebElement submitButton;
 
+    @FindBy(id = "deposit-menu-item")
+    public WebElement depositBtn;
+
+    public void clickDeposit(){
+        depositBtn.click();
+    }
+
     public void logOutFromMainPage(){
         userPicture.click ();
         logOutButton.click ();
