@@ -5,8 +5,6 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import utilities.Driver;
 
-import java.nio.channels.Selector;
-
 public class MainPage {
 
     public MainPage(){
@@ -30,6 +28,13 @@ public class MainPage {
 
     @FindBy(xpath="//button[@class='btn btn-primary btn-sm']")
     public WebElement submitButton;
+
+    @FindBy(id = "deposit-menu-item")
+    public WebElement depositBtn;
+
+    public void clickDeposit(){
+        depositBtn.click();
+    }
 
     public void logOutFromMainPage(){
         userPicture.click ();

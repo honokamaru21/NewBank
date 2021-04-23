@@ -18,7 +18,7 @@ public class janeSteps {
     SavingsPages savingsPages = new SavingsPages();
     double accountBalance;
     Integer accountNumber;
-    DataBase2 db = new DataBase2();
+    DataBase2 db2 = new DataBase2();
 
     @When("^user click on savings account$")
     public void user_click_on_savings_account()  {
@@ -43,17 +43,22 @@ public class janeSteps {
         String strAccountNumber = savingsPages.accountNumber486130124.getText ();
         int indexOfColonOfNumber = strAccountNumber.indexOf (":");
         accountNumber = Integer.parseInt (strAccountNumber.substring (indexOfColonOfNumber + 2));
+        String getAccountQuery = "SELECT current_balance FROM digitalbank.account WHERE name = 'JS_Account'";
+        ResultSet rs = db2.queryToRs(getAccountQuery);
+        rs.next ();
+        Assert.assertEquals(rs.getDouble ("current_balance"), accountBalance, .00);
+        db2.close ();
 
-        String getAccountQuery = "USE digitalbank;\n" +
-                "SELECT  current_balance\n" +
-                "FROM account\n" +
-                "WHERE name = "+actualAccount+"\n" +
-                "AND account_number= ?;";
-
-        ResultSet rs = db.queryToRs(getAccountQuery,accountNumber);
-        double actualAmount = rs.getDouble("current_balance");
-
-        Assert.assertEquals(amount,actualAmount, .00);
+//        String getAccountQuery = "USE digitalbank;\n" +
+//                "SELECT  current_balance\n" +
+//                "FROM account\n" +
+//                "WHERE name = "+actualAccount+"\n" +
+//                "AND account_number= ?;";
+//
+//        ResultSet rs = db.queryToRs(getAccountQuery,accountNumber);
+//        double actualAmount = rs.getDouble("current_balance");
+//
+//        Assert.assertEquals(amount,actualAmount, .00);
 
     }
 

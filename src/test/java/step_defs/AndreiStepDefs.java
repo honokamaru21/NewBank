@@ -8,7 +8,7 @@ import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import pages.MainPage;
 import pages.WithdrawalPage;
-import utilities.DataBase;
+import utilities.DataBase2;
 import utilities.Driver;
 
 import java.sql.ResultSet;
@@ -20,7 +20,7 @@ public class AndreiStepDefs {
 
     MainPage mainPage = new MainPage();
     WithdrawalPage withdrawalPage = new WithdrawalPage();
-    DataBase dataBase = new DataBase();
+    DataBase2 dataBase2 = new DataBase2();
     double transactionAmount;
 
     @When("^user clicks on Withdraw button$")
@@ -59,11 +59,15 @@ public class AndreiStepDefs {
     @Then("^user sees that withdrawal amount should drop down by (\\d+) dollars$")
     public void user_sees_that_withdrawal_amount_should_drop_down_by_dollars(int arg1) throws Throwable {
 
-//        String query = "select  amount \n" +
-//                "FROM account_transaction\n" +
-//                "where account_id = 430\n" +
-//                "ORDER BY date(transaction_date) \n" +
-//                "desc limit 1";
+        String query = "select  amount \n" +
+                "FROM account_transaction\n" +
+                "where account_id = 430\n" +
+                "ORDER BY date(transaction_date) \n" +
+                "desc limit 1";
+        ResultSet rs = dataBase2.queryToRs (query);
+        rs.next ();
+        Assert.assertEquals (rs.getDouble ("amount"), -34.00, .00);
+        dataBase2.close ();
 //
 //        ResultSet rs = dataBase.query (query);
 //        List<Map<String, Object>> table = dataBase.convertResultSet (rs);
@@ -72,15 +76,17 @@ public class AndreiStepDefs {
 //            transactionAmount = Double.parseDouble (number.getValue ().toString ());
 //        }
 //        dataBase.close ();
-        ResultSet rs = dataBase.query("select  amount \n" +
-                "FROM account_transaction\n" +
-                "where account_id = 430\n" +
-                "ORDER BY date(transaction_date) \n" +
-                "desc limit 1");
-        List<Map<String, Object>> table = dataBase.convertResultSet(rs);
-        String s = String.valueOf(table.get(0).get("amount"));
-        System.out.println(s);
-        table.forEach(System.out::println);
-        Assert.assertTrue("The amount does not math", s.contains("34"));
+
+
+//        ResultSet rs = dataBase.query("select  amount \n" +
+//                "FROM account_transaction\n" +
+//                "where account_id = 430\n" +
+//                "ORDER BY date(transaction_date) \n" +
+//                "desc limit 1");
+//        List<Map<String, Object>> table = dataBase.convertResultSet(rs);
+//        String s = String.valueOf(table.get(0).get("amount"));
+//        System.out.println(s);
+//        table.forEach(System.out::println);
+//        Assert.assertTrue("The amount does not math", s.contains("34"));
     }
 }
