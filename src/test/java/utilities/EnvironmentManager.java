@@ -32,8 +32,10 @@ public class EnvironmentManager {
     private static void QA() {
         //to set up qa vars
         baseUrl = "http://3.131.35.165:8080/bank/login";
-        username = "bilbo@shire.com";
-        password = "Bilbo01@";
+        username = "frodo@shire.com";
+        password = "Frodo01@";
+        //username = "bilbo@shire.com";
+        //password = "Bilbo01@";
     }
 
     private static void PROD() {
