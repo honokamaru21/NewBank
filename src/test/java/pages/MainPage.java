@@ -56,5 +56,6 @@ public class MainPage {
         viewSavingsButton.click();
     }
 
-
+    @FindBy(id="transfer-menu-item")
+    public WebElement transferOptionBetweenMyAccount;
 }
