@@ -5,7 +5,6 @@ import cucumber.api.java.After;
 import cucumber.api.java.Before;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
-import org.openqa.selenium.WebDriver;
 import pages.MainPage;
 import utilities.Driver;
 import utilities.EnvironmentManager;
@@ -19,7 +18,7 @@ public class Hooks {
     }
 
     @After
-    public void tearDown(Scenario scenario){
+    public void tearDown(Scenario scenario) throws InterruptedException{
 
         try {
             if (scenario.isFailed()) {
@@ -31,6 +30,7 @@ public class Hooks {
             e.printStackTrace();
         }
 
+        Thread.sleep(2000);
         mainPage.logOutFromMainPage ();
         Driver.closeDriver();
     }
