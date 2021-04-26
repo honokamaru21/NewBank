@@ -40,7 +40,7 @@ public class Roma_steps {
         System.out.println(query);
        rs.next();
        double actual = rs.getDouble ("current_balance");
-
+        System.out.println(actual);
        double actualBalance = Double.parseDouble(transferPAge.checkBalance.getText().substring(1));
 
        Assert.assertEquals("wrong input",actual,actualBalance,.00);
