@@ -37,7 +37,7 @@ public class Roma_steps {
        String query ="SELECT current_balance FROM digitalbank.account WHERE account_number = 486130131";
 
        ResultSet rs  = dataBase2.queryToRs(query);
-
+        System.out.println(query);
        rs.next();
        double actual = rs.getDouble ("current_balance");
 
