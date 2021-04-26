@@ -34,10 +34,10 @@ public class RomaSteps {
         String query ="SELECT current_balance FROM digitalbank.account WHERE account_number = 486130131";
 
         ResultSet rs  = dataBase2.queryToRs(query);
-        System.out.println(query);
+
         rs.next();
         double actual = rs.getDouble ("current_balance");
-        System.out.println(actual);
+
         double actualBalance = Double.parseDouble(transferPAge.checkBalance.getText().substring(1));
 
         Assert.assertEquals("wrong input",actual,actualBalance,.00);
