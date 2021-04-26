@@ -7,7 +7,7 @@ import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
 import pages.CheckingPages;
 import pages.MainPage;
-import utilities.DataBase;
+import utilities.DataBase2;
 import utilities.Driver;
 
 import java.sql.ResultSet;
@@ -20,7 +20,8 @@ public class AccountDataBaseValidation {
     WebDriver driver = Driver.getDriver ();
     MainPage mainPage = new MainPage ();
     CheckingPages checking = new CheckingPages ();
-    DataBase db = new DataBase ();
+    DataBase2 db2 = new DataBase2 ();
+
 
     @When("^user gets checking account number$")
     public void user_gets_checking_account_number() throws Throwable {
@@ -40,21 +41,15 @@ public class AccountDataBaseValidation {
     @When("^user gets account number from data base$")
     public void user_gets_account_number_from_data_base() throws Throwable {
         String getAccountQuery = "SELECT account_number FROM digitalbank.account WHERE name = 'Hobbit';";
-        ResultSet rs = db.query (getAccountQuery);
-        List<Map<String, Object>> table = db.convertResultSet (rs);
-        Map<String, Object> accountTable = table.get (0);
-        for (Map.Entry<String, Object> number : accountTable.entrySet ()) {
-            actualAccountNumber = Integer.parseInt (number.getValue ().toString ());
-        }
-        db.close ();
+        ResultSet rs = db2.queryToRs (getAccountQuery);
+        rs.next ();
+        actualAccountNumber = rs.getInt ("account_number");
+        System.out.println ("Account number from data base: " + actualAccountNumber);
     }
 
     @Then("^account numbers have to match$")
     public void account_numbers_have_to_match() throws Throwable {
-        //conflict 2
-        System.out.println (accountNumber);
-        System.out.println (actualAccountNumber);
-        Assert.assertEquals ("Account number validation failed", accountNumber, actualAccountNumber);
-       // Assert.assertEquals ("Account number validation failed", 486130062, actualAccountNumber);
+        Assert.assertEquals (actualAccountNumber, accountNumber);
+        db2.close ();
     }
 }
