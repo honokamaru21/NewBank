@@ -25,6 +25,20 @@ public class TransferPAge {
     @FindBy(xpath = "//table[@id=\"transactionTable\"]//tbody//tr//td[5]")
     public WebElement checkBalance;
 
+
+    @FindBy(xpath = "//img[@class='user-avatar rounded-circle']")
+    public WebElement pictureBtn;
+
+    @FindBy(xpath = "//a[@href='/bank/logout']")
+    public WebElement logoutBtn;
+
+    public void logOut(){
+        pictureBtn.click();
+        logoutBtn.click();
+    }
+
+
+
     public void setSelectFrom() {
         Select dropDown = new Select (selectFrom);
         dropDown.selectByValue ("797");

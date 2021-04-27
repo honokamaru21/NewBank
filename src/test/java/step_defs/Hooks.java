@@ -31,7 +31,6 @@ public class Hooks {
         }
 
         Thread.sleep(2000);
-        mainPage.logOutFromMainPage ();
         Driver.closeDriver();
     }
 }

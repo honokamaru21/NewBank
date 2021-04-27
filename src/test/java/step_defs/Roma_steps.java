@@ -17,23 +17,26 @@ public class Roma_steps {
     DataBase2 dataBase2 = new DataBase2();
 
     @When("^user go to transfer functionality$")
-    public void user_go_to_transfer_functionality()  {
+    public void user_go_to_transfer_functionality()  throws InterruptedException{
+        Thread.sleep(3000);
     mainPage.transferOptionBetweenMyAccount.click();
 
     }
 
     @When("^user chose to transfer from \"([^\"]*)\" to \"([^\"]*)\"$")
-    public void user_chose_to_transfer_from_to(String arg1, String arg2) {
+    public void user_chose_to_transfer_from_to(String arg1, String arg2) throws InterruptedException{
 
+        Thread.sleep(3000);
         transferPAge.setSelectFrom();
         transferPAge.setToAccount();
-        transferPAge.inputAmountField.sendKeys("100");
+        transferPAge.inputAmountField.sendKeys("1");
         transferPAge.SubmitButton.click();
 
 
     }
     @Then("^user verify current balance on checking account$")
-    public void user_verify_current_balance_on_checking_account() throws SQLException {
+    public void user_verify_current_balance_on_checking_account() throws SQLException, InterruptedException{
+        Thread.sleep(3000);
        String query ="SELECT current_balance FROM digitalbank.account WHERE account_number = 486130131";
 
        ResultSet rs  = dataBase2.queryToRs(query);
@@ -45,7 +48,8 @@ public class Roma_steps {
 
        Assert.assertEquals("wrong input",actual,actualBalance,.00);
 
-
+       Thread.sleep(3000);
+       transferPAge.logOut();
 
     }
 }
